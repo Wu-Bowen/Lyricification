@@ -72,8 +72,8 @@ export default function Dashboard({ code }) {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
             />
-            {searchResult.length == 0 && (
-                <div className="text-center my-2" style={{ whiteSpace: 'pre' }}>
+            {searchResult.length === 0 && (
+                <div className="text-center my-2" style={{ whiteSpace: 'pre', paddingBottom: '80px'}}>
                     {lyrics}
                 </div>
             )}

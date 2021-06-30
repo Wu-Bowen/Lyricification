@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function useAuth(code) {
@@ -36,6 +36,6 @@ export default function useAuth(code) {
                 })
         }, (expiresIn - 60) * 1000)
         return () => clearInterval(interval);
-    }, [refreshToken, accessToken])
+    }, [refreshToken, accessToken, expiresIn])
     return accessToken
 }

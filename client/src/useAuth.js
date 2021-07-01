@@ -5,9 +5,13 @@ export default function useAuth(code) {
     const [accessToken, setAccessToken] = useState();
     const [refreshToken, setRefreshToken] = useState();
     const [expiresIn, setExpiresIn] = useState();
+    // const URL = process.env.NODE_ENV
+    // ? 'http://localhost:3001' 
+    // : 'https://lyricification.herokuapp.com'
+
 
     useEffect(() => {
-        axios.post('http://localhost:3001/login', {
+        axios.post(`https://lyricification.herokuapp.com/login`, {
             code,
         })
             .then(res => {
@@ -24,7 +28,7 @@ export default function useAuth(code) {
     useEffect(() => {
         if (!refreshToken || !expiresIn) return;
         const interval = setInterval(() => {
-            axios.post('http://localhost:3001/refresh', {
+            axios.post(`${URL}/refresh`, {
                 refreshToken,
             })
                 .then(res => {

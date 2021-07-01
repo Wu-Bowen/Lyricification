@@ -16,6 +16,9 @@ export default function Dashboard({ code }) {
     const [searchResult, setSearchResult] = useState([]);
     const [selectedSong, setSelectedSong] = useState();
     const [lyrics, setLyrics] = useState('');
+    // const URL = process.env.NODE_ENV
+    // ? 'http://localhost:3001' 
+    // : 'https://lyricification.herokuapp.com'
 
     const chooseTrack = (track) => {
         setSelectedSong(track);
@@ -25,7 +28,7 @@ export default function Dashboard({ code }) {
 
     useEffect(() => {
         if (!selectedSong) return
-        axios.get('http://localhost:3001/lyrics', {
+        axios.get(`https://lyricification.herokuapp.com/lyrics`, {
             params: {
                 track: selectedSong.title,
                 artist: selectedSong.artist

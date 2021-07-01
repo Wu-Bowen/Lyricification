@@ -6,9 +6,11 @@ const spotifyWebApi = require('spotify-web-api-node');
 
 const app = express();
 const lyricsFinder = require('lyrics-finder');
+app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+const PORT = process.env.PORT || 3001;
 
 app.post('/refresh', (req, res) => {
     const refreshToken = req.body.refresh_token;
@@ -27,6 +29,7 @@ app.post('/refresh', (req, res) => {
             })
         })
         .catch(err => {
+            console.log(process.env.REDIRECT_URI);
             console.log(err)
             res.sendStatus(400)
         })
@@ -48,6 +51,7 @@ app.post('/login', (req, res) => {
             })
         })
         .catch(err => {
+            console.log(process.env.REDIRECT_URI);
             console.log(err);
             res.sendStatus(400)
         })
@@ -58,4 +62,6 @@ app.get('/lyrics', async (req, res) => {
     res.json({ lyrics })
 })
 
-app.listen(3001);
+app.listen(PORT, function () {
+    console.warn(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
+}); 
